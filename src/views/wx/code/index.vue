@@ -23,14 +23,14 @@ export default {
     } else {
       getOpenidByCode({
         code
-      }).then(response => {
+      }).then((response) => {
         store.commit('app/setAppOpenid', {
           openid: response.data
         })
         if (path && backType) {
           setSharePath()
           setShareBackType()
-          this.$router.push({
+          this.$router.replace({
             path: `${path}?backType=${backType}`
           })
         } else {
