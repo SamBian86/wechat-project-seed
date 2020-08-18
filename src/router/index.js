@@ -5,8 +5,7 @@ Vue.use(Router)
 export const constantRouterMap = [
   {
     path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
+    component: () => import('@/views/404')
   },
   {
     path: '/share',
@@ -14,10 +13,7 @@ export const constantRouterMap = [
   },
   {
     path: '/code',
-    component: () => import('@/views/wx/code/index'),
-    meta: {
-      title: '获取code'
-    }
+    component: () => import('@/views/wx/code/index')
   },
   {
     path: '/login',
@@ -41,9 +37,8 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '**',
-    redirect: '/404',
-    hidden: true
+    path: '*',
+    redirect: '/404'
   }
 ]
 
