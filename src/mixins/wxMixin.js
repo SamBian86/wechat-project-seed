@@ -181,7 +181,7 @@ export default {
     },
     handleGetCode(path) {
       const appId = process.env.VUE_APP_APP_ID
-      const baseUrl = process.env.VUE_APP_BASE_URL
+      const baseUrl = window.location.origin
       const redirectUri = encodeURIComponent(`${baseUrl}${path}`)
       const state = Math.round(Math.random() * 100)
       window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${redirectUri}&response_type=code&scope=snsapi_userinfo&state=${state}#wechat_redirect`
