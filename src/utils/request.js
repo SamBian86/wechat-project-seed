@@ -2,7 +2,8 @@ import axios from 'axios'
 import router from '@/router'
 import Vue from 'vue'
 import { Notify, Dialog } from 'vant'
-import { getAppToken, getAppOpenid } from '@/utils/storage'
+import { getAppToken, setAppToken, getAppOpenid } from '@/utils/storage'
+import requestMessage from '@/utils/requestMessage'
 Vue.use(Notify).use(Dialog)
 
 // create an axios instance
@@ -47,38 +48,17 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (res.code !== 0) {
-      if (res.code === 40018) {
-        // token已失效请重新登录
-        Dialog.alert({
-          message: res.msg
-        }).then(function() {
-          checkToken()
-        })
-        return Promise.reject(res)
+      const message = requestMessage.get(res.code)
+      // 需要重新登录的报错
+      const loginAgain = [100005001, 100005002, 500, 401, 403]
+
+      if (loginAgain.includes(res.code)) {
+        // token已失效请重新登录,清空token
+        setAppToken()
+        Notify(message)
+        checkToken()
+        return false
       }
-      if (res.code === 40002) {
-        // 验证码失效
-        Notify(res.msg)
-        return Promise.reject(res)
-      }
-      if (res.code === 40001) {
-        // 鉴权token失效
-        return Promise.reject(res)
-      }
-      if (res.code === 41504) {
-        return Promise.reject(res)
-      }
-      if (res.code === 40006) {
-        // 账号或密码不正确
-        return Promise.reject(res)
-      }
-      if (res.code === 100005102) {
-        return Promise.reject(res)
-      }
-      if (res.code === 10021) {
-        return Promise.reject(res)
-      }
-      Notify(res.msg)
       return Promise.reject(res)
     } else {
       return response.data

@@ -37,10 +37,18 @@ Vue.use(Field).use(CellGroup).use(Button).use(Toast)
 import { validatePhone } from '@/utils/validate'
 import pageMixin from '@/mixins/pageMixin'
 import { login, getSmsByMobile } from '@/api/auth'
+import { getAppToken } from '@/utils/storage'
 
 export default {
   mixins: [pageMixin],
-  created() {},
+  created() {
+    const app_token = getAppToken()
+    if (app_token) {
+      this.$router.push({
+        path: `/report`
+      })
+    }
+  },
   data() {
     return {
       vCodeText: '获取验证码',
@@ -123,11 +131,12 @@ export default {
         getSmsByMobile({
           mobile
         })
-          .then((res) => {
+          .then(() => {
             this.pressVButton = true
             this.vCodeTime = this.vCodeDefaultTime
             this.getVCodeTimer()
-            Toast(res.msg)
+            // Toast(res.msg)
+            Toast('短信验证码已发送!')
           })
           .catch((res) => {
             Toast(res.msg)
