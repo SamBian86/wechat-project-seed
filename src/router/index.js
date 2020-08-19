@@ -4,8 +4,8 @@ Vue.use(Router)
 
 export const constantRouterMap = [
   {
-    path: '/404',
-    component: () => import('@/views/404')
+    path: '',
+    component: () => import('@/views/wx/auth/index')
   },
   {
     path: '/share',
@@ -35,6 +35,10 @@ export const constantRouterMap = [
     meta: {
       title: '报告详情'
     }
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/404')
   },
   {
     path: '*',

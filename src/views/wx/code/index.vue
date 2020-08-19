@@ -41,8 +41,8 @@ export default {
   },
   methods: {
     enterApp() {
-      this.$router.push({
-        path: `/report`
+      this.$router.replace({
+        path: `/login`
       })
     }
   }

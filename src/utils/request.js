@@ -12,7 +12,7 @@ const service = axios.create({
 })
 
 const checkToken = function() {
-  if (getAppToken() === '' || getAppOpenid() === '') {
+  if (getAppToken() === '') {
     router.push('/login')
   }
 }

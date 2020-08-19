@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-cloak>
+  <div id="app" class="wrapper" v-cloak>
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>

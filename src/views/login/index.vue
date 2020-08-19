@@ -13,21 +13,13 @@
               type="default"
               :disabled="pressVButton"
               @click="getVCode"
-              >{{ vCodeText }}</van-button
-            >
+            >{{ vCodeText }}</van-button>
           </van-field>
         </van-cell-group>
       </div>
 
       <div class="login_item_box">
-        <van-button
-          @click="loginNow"
-          class="login_item_join"
-          block
-          round
-          size="large"
-          >验证手机号</van-button
-        >
+        <van-button @click="loginNow" class="login_item_join" block round size="large">验证手机号</van-button>
       </div>
     </div>
   </div>
@@ -40,10 +32,7 @@ import 'vant/lib/field/style'
 import 'vant/lib/cell-group/style'
 import 'vant/lib/button/style'
 import 'vant/lib/toast/style'
-Vue.use(Field)
-  .use(CellGroup)
-  .use(Button)
-  .use(Toast)
+Vue.use(Field).use(CellGroup).use(Button).use(Toast)
 
 import { validatePhone } from '@/utils/validate'
 import pageMixin from '@/mixins/pageMixin'
@@ -85,7 +74,7 @@ export default {
         mobile,
         vcode
       })
-        .then(res => {
+        .then((res) => {
           store.commit('app/setAppToken', {
             token: res.data.token
           })
@@ -93,15 +82,15 @@ export default {
         })
         .then(() => {
           // 登录成功
-          this.getCode()
+          this.enterApp()
         })
-        .catch(res => {
+        .catch((res) => {
           Toast(res.msg)
         })
     },
-    getCode() {
+    enterApp() {
       this.$router.push({
-        path: `/code`
+        path: `/report`
       })
     },
     getVCode() {
@@ -134,13 +123,13 @@ export default {
         getSmsByMobile({
           mobile
         })
-          .then(res => {
+          .then((res) => {
             this.pressVButton = true
             this.vCodeTime = this.vCodeDefaultTime
             this.getVCodeTimer()
             Toast(res.msg)
           })
-          .catch(res => {
+          .catch((res) => {
             Toast(res.msg)
           })
       } else {
@@ -167,13 +156,13 @@ export default {
 }
 
 .login_item_join {
-  background: #fa5067;
+  background: #956bb7;
   color: #fff;
 }
 
 .login_item_code {
   color: #fff;
-  background: #fa5067;
+  background: #956bb7;
   border: none;
   border-radius: 2.6667vw;
 }
