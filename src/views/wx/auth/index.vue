@@ -17,8 +17,10 @@ Vue.use(Button)
 
 export default {
   mixins: [wxMixin],
-  data: {
-    showBtn: false
+  data() {
+    return {
+      showBtn: false
+    }
   },
   created() {
     const app_openid = getAppOpenid()
